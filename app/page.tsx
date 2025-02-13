@@ -4,7 +4,10 @@ export default function Home() {
   return (
     <div className="min-h-screen grid grid-rows-[80px_1fr_80px] bg-gray-900 text-white">
       <header className="bg-gray-800 flex items-center justify-between px-8">
-        <h1 className="text-3xl font-bold">KPI速報</h1>
+        <div>
+          <h1 className="text-3xl font-bold">KPI速報</h1>
+          <p className="text-sm text-gray-400">2025-02-03 20:26:33 現在</p>
+        </div>
         <div className="flex gap-4">
           {[0, 20, 40].map((minutes) => {
             const date = new Date();
