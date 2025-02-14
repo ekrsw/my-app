@@ -107,7 +107,7 @@ export default function Home() {
             >
               <table className="w-full border-collapse">
                 <thead>
-                  <tr className="border-b border-gray-400">
+                  <tr className="border-b-2 border-gray-400">
                     <th className="text-left p-2 whitespace-nowrap">氏名</th>
                     <th className="hidden lg:table-cell text-left p-2 whitespace-nowrap">シフト</th>
                     <th className="text-left p-2 whitespace-nowrap">ACW</th>
@@ -119,7 +119,7 @@ export default function Home() {
                 <tbody>
                   {/* サンプルデータ */}
                   {Array.from({ length: 5 }).map((_, index) => (
-                    <tr key={index} className="border-b border-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600">
+                    <tr key={index} className="border-b border-gray-300/50 hover:bg-gray-100/50 dark:hover:bg-gray-600/30">
                       <td className="p-2 whitespace-nowrap">山田 太郎</td>
                       <td className="hidden lg:table-cell p-2 whitespace-nowrap">9:00-18:00</td>
                       <td className="p-2 whitespace-nowrap">00:30</td>
