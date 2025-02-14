@@ -109,7 +109,7 @@ export default function Home() {
                 <thead>
                   <tr className="border-b border-gray-400">
                     <th className="text-left p-2 whitespace-nowrap">氏名</th>
-                    <th className="hidden sm:table-cell text-left p-2 whitespace-nowrap">シフト</th>
+                    <th className="hidden lg:table-cell text-left p-2 whitespace-nowrap">シフト</th>
                     <th className="text-left p-2 whitespace-nowrap">ACW</th>
                     <th className="text-left p-2 whitespace-nowrap">ATT</th>
                     <th className="text-left p-2 whitespace-nowrap">CPH</th>
@@ -121,7 +121,7 @@ export default function Home() {
                   {Array.from({ length: 5 }).map((_, index) => (
                     <tr key={index} className="border-b border-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600">
                       <td className="p-2 whitespace-nowrap">山田 太郎</td>
-                      <td className="hidden sm:table-cell p-2 whitespace-nowrap">9:00-18:00</td>
+                      <td className="hidden lg:table-cell p-2 whitespace-nowrap">9:00-18:00</td>
                       <td className="p-2 whitespace-nowrap">00:30</td>
                       <td className="p-2 whitespace-nowrap">02:45</td>
                       <td className="p-2 whitespace-nowrap">4.5</td>
