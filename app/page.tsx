@@ -29,10 +29,10 @@ export default function Home() {
   }
 
   return (
-    <div className={`min-h-screen grid grid-rows-[80px_1fr_50px] ${bgColor} ${textColor}`}>
-      <header className={`${headerFooterBg} flex items-center justify-between px-2`}>
+    <div className={`min-h-screen grid grid-rows-[60px_1fr_50px] ${bgColor} ${textColor}`}>
+      <header className={`${headerFooterBg} flex items-center justify-between px-4`}>
         <div>
-          <h1 className="text-3xl font-bold">KPI速報</h1>
+          <h1 className="text-2xl font-bold">KPI速報</h1>
           <p className={`text-sm ${subTextColor}`}>
             {currentTime.toLocaleString('ja-JP', { 
               timeZone: 'Asia/Tokyo',
@@ -46,7 +46,7 @@ export default function Home() {
             })} 現在
           </p>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           {[0, 20, 40].map((minutes) => {
             const date = new Date(currentTime);
             // Asia/Tokyoのタイムゾーンを設定
@@ -55,7 +55,7 @@ export default function Home() {
             return (
               <div
                 key={minutes}
-                className="flex flex-col items-center"
+                className="flex flex-col items-start w-24"
               >
                 <span className={`${subTextColor} text-[10px]`}>
                   {minutes === 0 ? '現在の時刻' : `${minutes}分前の時刻`}
