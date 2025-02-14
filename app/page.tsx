@@ -46,7 +46,7 @@ export default function Home() {
             })} 現在
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
           {[0, 20, 40].map((minutes) => {
             const date = new Date(currentTime);
             // Asia/Tokyoのタイムゾーンを設定
@@ -55,12 +55,12 @@ export default function Home() {
             return (
               <div
                 key={minutes}
-                className={`${boxBg} rounded-lg px-3 py-2 relative`}
+                className="flex flex-col items-center"
               >
-                <span className={`absolute top-1 left-1.5 ${subTextColor} text-[10px]`}>
+                <span className={`${subTextColor} text-[10px]`}>
                   {minutes === 0 ? '現在の時刻' : `${minutes}分前の時刻`}
                 </span>
-                <span className="font-mono mt-4 block text-center text-sm">
+                <span className={`font-mono text-base ${textColor}`}>
                   {tokyoTime.getHours().toString().padStart(2, '0')}:
                   {tokyoTime.getMinutes().toString().padStart(2, '0')}:
                   {tokyoTime.getSeconds().toString().padStart(2, '0')}
@@ -73,9 +73,9 @@ export default function Home() {
             className={`flex items-center justify-center w-8 h-8 rounded-lg ${boxBg} hover:opacity-80 transition-opacity`}
           >
             {isDarkMode ? (
-              <span className="text-yellow-500 text-lg">☀</span>
+              <span className={`${subTextColor} text-lg`}>☼</span>
             ) : (
-              <span className="text-lg">🌙</span>
+              <span className={`${subTextColor} text-lg`}>☽</span>
             )}
           </button>
         </div>
