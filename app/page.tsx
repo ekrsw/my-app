@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [currentTime, setCurrentTime] = useState<Date | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const bgColor = isDarkMode ? 'bg-gray-900' : 'bg-gray-100';
+  const bgColor = isDarkMode ? 'bg-gray-900' : 'bg-gray-200';
   const headerFooterBg = isDarkMode ? 'bg-gray-800' : 'bg-white';
-  const boxBg = isDarkMode ? 'bg-gray-700' : 'bg-gray-200';
+  const boxBg = isDarkMode ? 'bg-gray-700' : 'bg-white';
   const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
   const subTextColor = isDarkMode ? 'text-gray-400' : 'text-gray-500';
 
@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen grid grid-rows-[60px_1fr_50px] ${bgColor} ${textColor}`}>
-      <header className={`${headerFooterBg} flex items-center justify-between px-4`}>
+      <header className={`${headerFooterBg} flex items-center justify-between px-4 shadow-md`}>
         <div>
           <h1 className="text-2xl font-bold">KPI速報</h1>
           <p className={`text-sm ${subTextColor}`}>
@@ -86,7 +86,7 @@ export default function Home() {
           {Array.from({ length: 8 }, (_, i) => (
             <div
               key={i}
-              className={`${boxBg} rounded-lg flex items-center justify-center text-xl font-bold ${textColor}`}
+              className={`${boxBg} rounded-lg flex items-center justify-center text-xl font-bold ${textColor} shadow-md`}
             >
               Box {i + 1}
             </div>
@@ -94,7 +94,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className={`${headerFooterBg} flex items-center px-2 py-2`}>
+      <footer className={`${headerFooterBg} flex items-center px-2 py-2 shadow-md`}>
         <div className={`text-sm ${subTextColor} text-left`}>
           <p>・CPHは暫定値です</p>
           <p>・データは１分ごとに更新されます</p>
