@@ -5,6 +5,19 @@ export default function Home() {
   const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // 初期値の設定
+  useEffect(() => {
+    const saved = localStorage.getItem('isDarkMode');
+    if (saved !== null) {
+      setIsDarkMode(JSON.parse(saved));
+    }
+  }, []);
+
+  // モード変更時の保存
+  useEffect(() => {
+    localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
+  }, [isDarkMode]);
+
   const bgColor = isDarkMode ? 'bg-gray-900' : 'bg-gray-200';
   const headerFooterBg = isDarkMode ? 'bg-gray-800' : 'bg-white';
   const boxBg = isDarkMode ? 'bg-gray-700' : 'bg-white';
