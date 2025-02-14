@@ -70,7 +70,7 @@ export default function Home() {
           })}
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
-            className={`flex items-center justify-center w-8 h-8 rounded-lg ${boxBg} hover:opacity-80 transition-opacity`}
+            className="flex items-center justify-center w-8 h-8 rounded-lg hover:opacity-80 transition-opacity"
           >
             {isDarkMode ? (
               <span className={`${subTextColor} text-lg`}>☼</span>
