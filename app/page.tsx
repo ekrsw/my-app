@@ -64,8 +64,8 @@ export default function Home() {
         </div>
       </header>
       
-      <main className="p-8 bg-gray-900">
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 h-full">
+      <main className="p-4 bg-gray-900">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 h-full">
           {Array.from({ length: 8 }, (_, i) => (
             <div
               key={i}
