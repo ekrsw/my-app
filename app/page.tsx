@@ -3,6 +3,13 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [currentTime, setCurrentTime] = useState<Date | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  const bgColor = isDarkMode ? 'bg-gray-900' : 'bg-gray-100';
+  const headerFooterBg = isDarkMode ? 'bg-gray-800' : 'bg-white';
+  const boxBg = isDarkMode ? 'bg-gray-700' : 'bg-gray-200';
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const subTextColor = isDarkMode ? 'text-gray-400' : 'text-gray-500';
 
   useEffect(() => {
     // 初期値を設定
@@ -22,11 +29,11 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen grid grid-rows-[80px_1fr_50px] bg-gray-900 text-white">
-      <header className="bg-gray-800 flex items-center justify-between px-2">
+    <div className={`min-h-screen grid grid-rows-[80px_1fr_50px] ${bgColor} ${textColor}`}>
+      <header className={`${headerFooterBg} flex items-center justify-between px-2`}>
         <div>
           <h1 className="text-3xl font-bold">KPI速報</h1>
-          <p className="text-sm text-gray-400">
+          <p className={`text-sm ${subTextColor}`}>
             {currentTime.toLocaleString('ja-JP', { 
               timeZone: 'Asia/Tokyo',
               year: 'numeric',
@@ -39,8 +46,8 @@ export default function Home() {
             })} 現在
           </p>
         </div>
-        <div className="flex gap-2">
-          {[0, 20, 40].map((minutes) => {
+        <div className="flex items-center gap-2">
+          {[40, 20, 0].map((minutes) => {
             const date = new Date(currentTime);
             // Asia/Tokyoのタイムゾーンを設定
             const tokyoTime = new Date(date.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
@@ -48,9 +55,9 @@ export default function Home() {
             return (
               <div
                 key={minutes}
-                className="bg-gray-700 rounded-lg px-3 py-2 relative"
+                className={`${boxBg} rounded-lg px-3 py-2 relative`}
               >
-                <span className="absolute top-1 left-1.5 text-gray-400 text-[10px]">
+                <span className={`absolute top-1 left-1.5 ${subTextColor} text-[10px]`}>
                   {minutes === 0 ? '現在の時刻' : `${minutes}分前の時刻`}
                 </span>
                 <span className="font-mono mt-4 block text-center text-sm">
@@ -61,15 +68,25 @@ export default function Home() {
               </div>
             );
           })}
+          <button
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            className={`flex items-center justify-center w-8 h-8 rounded-lg ${boxBg} hover:opacity-80 transition-opacity`}
+          >
+            {isDarkMode ? (
+              <span className="text-yellow-500 text-lg">☀</span>
+            ) : (
+              <span className="text-lg">🌙</span>
+            )}
+          </button>
         </div>
       </header>
       
-      <main className="p-2 bg-gray-900">
+      <main className={`p-2 ${bgColor}`}>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 h-full">
           {Array.from({ length: 8 }, (_, i) => (
             <div
               key={i}
-              className="bg-gray-700 rounded-lg flex items-center justify-center text-xl font-bold text-gray-100"
+              className={`${boxBg} rounded-lg flex items-center justify-center text-xl font-bold ${textColor}`}
             >
               Box {i + 1}
             </div>
@@ -77,8 +94,8 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="bg-gray-800 flex items-center px-2 py-2">
-        <div className="text-sm text-gray-400 text-left">
+      <footer className={`${headerFooterBg} flex items-center px-2 py-2`}>
+        <div className={`text-sm ${subTextColor} text-left`}>
           <p>・CPHは暫定値です</p>
           <p>・データは１分ごとに更新されます</p>
         </div>
