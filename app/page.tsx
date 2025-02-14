@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen grid grid-rows-[80px_1fr_50px] bg-gray-900 text-white">
-      <header className="bg-gray-800 flex items-center justify-between px-4">
+      <header className="bg-gray-800 flex items-center justify-between px-2">
         <div>
           <h1 className="text-3xl font-bold">KPI速報</h1>
           <p className="text-sm text-gray-400">
@@ -64,7 +64,7 @@ export default function Home() {
         </div>
       </header>
       
-      <main className="p-4 bg-gray-900">
+      <main className="p-2 bg-gray-900">
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 h-full">
           {Array.from({ length: 8 }, (_, i) => (
             <div
@@ -77,7 +77,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="bg-gray-800 flex items-center px-4 py-2">
+      <footer className="bg-gray-800 flex items-center px-2 py-2">
         <div className="text-sm text-gray-400 text-left">
           <p>・CPHは暫定値です</p>
           <p>・データは１分ごとに更新されます</p>
