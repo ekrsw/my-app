@@ -94,8 +94,8 @@ export default function Home() {
         </div>
       </header>
       
-      <main className={`p-2 ${bgColor}`}>
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 h-full">
+      <main className={`p-2 ${bgColor} h-full`}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 h-full">
           {Array.from({ length: 8 }, (_, i) => (
             <div
               key={i}
