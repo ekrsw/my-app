@@ -39,7 +39,7 @@ export default function Home() {
             })} 現在
           </p>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-2">
           {[0, 20, 40].map((minutes) => {
             const date = new Date(currentTime);
             // Asia/Tokyoのタイムゾーンを設定
