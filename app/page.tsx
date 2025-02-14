@@ -47,7 +47,7 @@ export default function Home() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          {[40, 20, 0].map((minutes) => {
+          {[0, 20, 40].map((minutes) => {
             const date = new Date(currentTime);
             // Asia/Tokyoのタイムゾーンを設定
             const tokyoTime = new Date(date.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
