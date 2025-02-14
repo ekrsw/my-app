@@ -46,7 +46,7 @@ export default function Home() {
             })} 現在
           </p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           {[0, 20, 40].map((minutes) => {
             const date = new Date(currentTime);
             // Asia/Tokyoのタイムゾーンを設定
@@ -73,9 +73,9 @@ export default function Home() {
             className="flex items-center justify-center w-8 h-8 rounded-lg hover:opacity-80 transition-opacity"
           >
             {isDarkMode ? (
-              <span className={`${subTextColor} text-lg`}>☼</span>
+              <span className={`${subTextColor} text-2xl`}>☼</span>
             ) : (
-              <span className={`${subTextColor} text-lg`}>☽</span>
+              <span className={`${subTextColor} text-2xl`}>☽</span>
             )}
           </button>
         </div>
