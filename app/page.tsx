@@ -58,11 +58,17 @@ export default function Home() {
         <div>
           <h1 className="text-2xl font-bold">KPI速報</h1>
           <p className={`text-sm ${subTextColor}`}>
+            <span className="hidden sm:inline">
+              {new Date(data.created_at).toLocaleString('ja-JP', { 
+                timeZone: 'Asia/Tokyo',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+              })}
+              {' '}
+            </span>
             {new Date(data.created_at).toLocaleString('ja-JP', { 
               timeZone: 'Asia/Tokyo',
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
               hour: '2-digit',
               minute: '2-digit',
               second: '2-digit',
