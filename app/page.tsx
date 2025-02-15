@@ -1,9 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useKpi } from "./hooks/useKpi";
+import { KpiDisplay } from "./components/KpiDisplay";
 
 export default function Home() {
   const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const { data, error, isLoading } = useKpi();
 
   // 初期値の設定
   useEffect(() => {
@@ -37,8 +40,16 @@ export default function Home() {
   }, []);
 
   // 初期レンダリング時はローディングを表示
-  if (!currentTime) {
-    return <div>Loading...</div>;
+  if (!currentTime || isLoading) {
+    return <div className={`min-h-screen ${bgColor} ${textColor} flex items-center justify-center`}>Loading...</div>;
+  }
+
+  if (error) {
+    return <div className={`min-h-screen ${bgColor} ${textColor} flex items-center justify-center`}>Error: {error}</div>;
+  }
+
+  if (!data) {
+    return <div className={`min-h-screen ${bgColor} ${textColor} flex items-center justify-center`}>No data available</div>;
   }
 
   return (
@@ -47,7 +58,7 @@ export default function Home() {
         <div>
           <h1 className="text-2xl font-bold">KPI速報</h1>
           <p className={`text-sm ${subTextColor}`}>
-            {currentTime.toLocaleString('ja-JP', { 
+            {new Date(data.created_at).toLocaleString('ja-JP', { 
               timeZone: 'Asia/Tokyo',
               year: 'numeric',
               month: '2-digit',
@@ -56,7 +67,7 @@ export default function Home() {
               minute: '2-digit',
               second: '2-digit',
               hour12: false
-            })} 現在
+            }) + ' 現在'}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -94,62 +105,18 @@ export default function Home() {
         </div>
       </header>
       
-      <main className={`p-2 ${bgColor} h-full`}>
-        <div className="flex flex-col gap-2 h-full">
-          <div className="flex flex-col sm:flex-row gap-2 flex-1">
-            <div
-              className={`${boxBg} rounded-lg flex items-center justify-center text-xl font-bold ${textColor} shadow-md h-40 sm:h-full w-full sm:w-[400px] flex-shrink-0`}
-            >
-              Box 1
-            </div>
-            <div
-              className={`${boxBg} rounded-lg p-4 shadow-md h-40 sm:h-full w-full overflow-auto`}
-            >
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="border-b-2 border-gray-400">
-                    <th className="text-left p-2 whitespace-nowrap">氏名</th>
-                    <th className="hidden lg:table-cell text-left p-2 whitespace-nowrap">シフト</th>
-                    <th className="text-left p-2 whitespace-nowrap">ACW</th>
-                    <th className="text-left p-2 whitespace-nowrap">ATT</th>
-                    <th className="text-left p-2 whitespace-nowrap">CPH</th>
-                    <th className="text-left p-2 whitespace-nowrap">クローズ</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* サンプルデータ */}
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <tr key={index} className="border-b border-gray-300/50 hover:bg-gray-100/50 dark:hover:bg-gray-600/30">
-                      <td className="p-2 whitespace-nowrap">山田 太郎</td>
-                      <td className="hidden lg:table-cell p-2 whitespace-nowrap">9:00-18:00</td>
-                      <td className="p-2 whitespace-nowrap">00:30</td>
-                      <td className="p-2 whitespace-nowrap">02:45</td>
-                      <td className="p-2 whitespace-nowrap">4.5</td>
-                      <td className="p-2 whitespace-nowrap">12</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-2 flex-1">
-            <div
-              className={`${boxBg} rounded-lg flex items-center justify-center text-xl font-bold ${textColor} shadow-md h-40 sm:h-full w-full`}
-            >
-              Box 3
-            </div>
-            <div
-              className={`${boxBg} rounded-lg flex items-center justify-center text-xl font-bold ${textColor} shadow-md h-40 sm:h-full w-full sm:w-[400px] flex-shrink-0`}
-            >
-              Box 4
-            </div>
-          </div>
-        </div>
+      <main className={`p-4 ${bgColor} h-full`}>
+        <KpiDisplay
+          data={data}
+          textColor={textColor}
+          subTextColor={subTextColor}
+          boxBg={boxBg}
+        />
       </main>
 
-      <footer className={`${headerFooterBg} flex items-center px-2 py-2 shadow-md`}>
+      <footer className={`${headerFooterBg} flex items-center px-4 py-2 shadow-md`}>
         <div className={`text-sm ${subTextColor} text-left`}>
-          <p>・CPHは暫定値です</p>
+          <p>・Bufferがマイナスの場合は目標未達を表します</p>
           <p>・データは１分ごとに更新されます</p>
         </div>
       </footer>
