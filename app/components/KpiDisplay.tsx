@@ -1,5 +1,6 @@
 import { KpiData } from '../types/kpi';
 import { formatPercentage, calcBuffer, wfc } from '../utils/kpi';
+import { settings } from '../config/settings';
 
 interface KpiDisplayProps {
   data: KpiData;
@@ -79,8 +80,8 @@ export function KpiDisplay({ data, textColor, subTextColor, boxBg }: KpiDisplayP
             <span className="font-mono">{data.phone_inquiries}</span>
           </div>
           <div className={`text-xl mt-4 ${textColor}`}>
-            Buffer:&nbsp;<span className={`buffer font-mono ${Number(calcBuffer(0.35, data.direct_handling, data.phone_inquiries)) > 0 ? 'positive' : ''}`}>
-              {calcBuffer(0.35, data.direct_handling, data.phone_inquiries)}
+            Buffer:&nbsp;<span className={`buffer font-mono ${Number(calcBuffer(settings.kpiTargets.directHandlingRate, data.direct_handling, data.phone_inquiries)) > 0 ? 'positive' : ''}`}>
+              {calcBuffer(settings.kpiTargets.directHandlingRate, data.direct_handling, data.phone_inquiries)}
             </span>
           </div>
         </div>
@@ -104,8 +105,8 @@ export function KpiDisplay({ data, textColor, subTextColor, boxBg }: KpiDisplayP
             </span>
           </div>
           <div className={`text-xl mt-4 ${textColor}`}>
-            Buffer:&nbsp;<span className={`buffer font-mono ${Number(calcBuffer(0.80, data.cumulative_callback_under_20_min, cumulativeAndWfcOver20min)) > 0 ? 'positive' : ''}`}>
-              {calcBuffer(0.80, data.cumulative_callback_under_20_min, cumulativeAndWfcOver20min)}
+            Buffer:&nbsp;<span className={`buffer font-mono ${Number(calcBuffer(settings.kpiTargets.callbackRates.within20min, data.cumulative_callback_under_20_min, cumulativeAndWfcOver20min)) > 0 ? 'positive' : ''}`}>
+              {calcBuffer(settings.kpiTargets.callbackRates.within20min, data.cumulative_callback_under_20_min, cumulativeAndWfcOver20min)}
             </span>
           </div>
         </div>
@@ -129,8 +130,8 @@ export function KpiDisplay({ data, textColor, subTextColor, boxBg }: KpiDisplayP
             </span>
           </div>
           <div className={`text-xl mt-4 ${textColor}`}>
-            Buffer:&nbsp;<span className={`buffer font-mono ${Number(calcBuffer(0.85, data.cumulative_callback_under_30_min, cumulativeAndWfcOver30min)) > 0 ? 'positive' : ''}`}>
-              {calcBuffer(0.85, data.cumulative_callback_under_30_min, cumulativeAndWfcOver30min)}
+            Buffer:&nbsp;<span className={`buffer font-mono ${Number(calcBuffer(settings.kpiTargets.callbackRates.within30min, data.cumulative_callback_under_30_min, cumulativeAndWfcOver30min)) > 0 ? 'positive' : ''}`}>
+              {calcBuffer(settings.kpiTargets.callbackRates.within30min, data.cumulative_callback_under_30_min, cumulativeAndWfcOver30min)}
             </span>
           </div>
         </div>
@@ -154,8 +155,8 @@ export function KpiDisplay({ data, textColor, subTextColor, boxBg }: KpiDisplayP
             </span>
           </div>
           <div className={`text-xl mt-4 ${textColor}`}>
-            Buffer:&nbsp;<span className={`buffer font-mono ${Number(calcBuffer(0.90, data.cumulative_callback_under_40_min, cumulativeAndWfcOver40min)) > 0 ? 'positive' : ''}`}>
-              {calcBuffer(0.90, data.cumulative_callback_under_40_min, cumulativeAndWfcOver40min)}
+            Buffer:&nbsp;<span className={`buffer font-mono ${Number(calcBuffer(settings.kpiTargets.callbackRates.within40min, data.cumulative_callback_under_40_min, cumulativeAndWfcOver40min)) > 0 ? 'positive' : ''}`}>
+              {calcBuffer(settings.kpiTargets.callbackRates.within40min, data.cumulative_callback_under_40_min, cumulativeAndWfcOver40min)}
             </span>
           </div>
         </div>
