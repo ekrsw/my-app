@@ -105,7 +105,7 @@ export default function Home() {
         </div>
       </header>
       
-      <main className={`p-4 ${bgColor} h-full`}>
+      <main className={`p-2 sm:p-4 ${bgColor} h-full overflow-auto`}>
         <KpiDisplay
           data={data}
           textColor={textColor}

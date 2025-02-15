@@ -32,127 +32,112 @@ export function KpiDisplay({ data, textColor, subTextColor, boxBg }: KpiDisplayP
     data.waiting_for_callback_over_40min;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
-      {/* 応答率 */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
+      {/* Box1: 応答率 */}
       <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
         <h2 className="text-lg font-bold mb-4">応答率</h2>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <span className={subTextColor}>応答率</span>
-            <span className={textColor}>{formatPercentage(data.response_rate)}%</span>
-          </div>
-          <div className="flex justify-between">
-            <span className={subTextColor}>応答数</span>
-            <span className={textColor}>{data.responses}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className={subTextColor}>総着信数</span>
-            <span className={textColor}>{data.total_calls}</span>
+        <div className="flex flex-col items-center">
+          <span className={`text-5xl font-bold mb-4 ${textColor}`}>
+            {formatPercentage(data.response_rate)}%
+          </span>
+          <div className={`text-2xl ${textColor} flex items-center gap-2`}>
+            <span className="font-mono">{data.responses}</span>
+            <span className="text-lg mx-2">/</span>
+            <span className="font-mono">{data.total_calls}</span>
           </div>
         </div>
       </div>
 
-      {/* 直受け率 */}
+      {/* Box2: 直受け率 */}
       <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
         <h2 className="text-lg font-bold mb-4">直受け率</h2>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <span className={subTextColor}>直受け率</span>
-            <span className={textColor}>{formatPercentage(data.direct_handling_rate)}%</span>
+        <div className="flex flex-col items-center">
+          <span className={`text-5xl font-bold mb-4 ${textColor}`}>
+            {formatPercentage(data.direct_handling_rate)}%
+          </span>
+          <div className={`text-2xl ${textColor} flex items-center gap-2`}>
+            <span className="font-mono">{data.direct_handling}</span>
+            <span className="text-lg mx-2">/</span>
+            <span className="font-mono">{data.phone_inquiries}</span>
           </div>
-          <div className="flex justify-between">
-            <span className={subTextColor}>直受け数</span>
-            <span className={textColor}>{data.direct_handling}</span>
+          <div className={`text-xl mt-4 ${textColor}`}>
+            Buffer:&nbsp;<span className="buffer font-mono">{calcBuffer(0.35, data.direct_handling, data.phone_inquiries)}</span>
           </div>
-          <div className="flex justify-between">
-            <span className={subTextColor}>電話問合せ数</span>
-            <span className={textColor}>{data.phone_inquiries}</span>
+        </div>
+      </div>
+
+      {/* Box3: 20分以内折返し率 */}
+      <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
+        <h2 className="text-lg font-bold mb-4">20分以内折返し率</h2>
+        <div className="flex flex-col items-center">
+          <span className={`text-5xl font-bold mb-4 ${textColor}`}>
+            {formatPercentage(data.cumulative_callback_rate_under_20_min)}%
+          </span>
+          <div className={`text-2xl ${textColor} flex items-center gap-2`}>
+            <span className="font-mono">{data.cumulative_callback_under_20_min}</span>
+            <span className="text-lg mx-2">/</span>
+            <span className="font-mono">
+              {cumulativeAndWfcOver20min}
+              <span className={`ml-1 text-2xl ${textColor}`}>
+                ({data.waiting_for_callback_over_20min})
+              </span>
+            </span>
           </div>
-          <div className="flex justify-between">
-            <span className={subTextColor}>Buffer</span>
-            <span className={`${textColor} buffer`}>
-              {calcBuffer(0.35, data.direct_handling, data.phone_inquiries)}
+          <div className={`text-xl mt-4 ${textColor}`}>
+            Buffer:&nbsp;<span className="buffer font-mono">
+              {calcBuffer(0.80, data.cumulative_callback_under_20_min, cumulativeAndWfcOver20min)}
             </span>
           </div>
         </div>
       </div>
 
-      {/* コールバック率 */}
+      {/* Box4: 30分以内折返し率 */}
       <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
-        <h2 className="text-lg font-bold mb-4">コールバック率</h2>
-        <div className="space-y-4">
-          {/* 20分以内 */}
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <span className={subTextColor}>20分以内</span>
-              <span className={textColor}>
-                {formatPercentage(data.cumulative_callback_rate_under_20_min)}%
+        <h2 className="text-lg font-bold mb-4">30分以内折返し率</h2>
+        <div className="flex flex-col items-center">
+          <span className={`text-5xl font-bold mb-4 ${textColor}`}>
+            {formatPercentage(data.cumulative_callback_rate_under_30_min)}%
+          </span>
+          <div className={`text-2xl ${textColor} flex items-center gap-2`}>
+            <span className="font-mono">{data.cumulative_callback_under_30_min}</span>
+            <span className="text-lg mx-2">/</span>
+            <span className="font-mono">
+              {cumulativeAndWfcOver30min}
+              <span className={`ml-1 text-2xl ${textColor}`}>
+                ({data.waiting_for_callback_over_30min})
               </span>
-            </div>
-            <div className="flex justify-between">
-              <span className={subTextColor}>達成数</span>
-              <span className={textColor}>{data.cumulative_callback_under_20_min}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className={subTextColor}>総数</span>
-              <span className={textColor}>{cumulativeAndWfcOver20min}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className={subTextColor}>Buffer</span>
-              <span className={`${textColor} buffer`}>
-                {calcBuffer(0.80, data.cumulative_callback_under_20_min, cumulativeAndWfcOver20min)}
-              </span>
-            </div>
+            </span>
           </div>
-
-          {/* 40分以内 */}
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <span className={subTextColor}>40分以内</span>
-              <span className={textColor}>
-                {formatPercentage(data.cumulative_callback_rate_under_40_min)}%
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className={subTextColor}>達成数</span>
-              <span className={textColor}>{data.cumulative_callback_under_40_min}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className={subTextColor}>総数</span>
-              <span className={textColor}>{cumulativeAndWfcOver40min}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className={subTextColor}>Buffer</span>
-              <span className={`${textColor} buffer`}>
-                {calcBuffer(0.90, data.cumulative_callback_under_40_min, cumulativeAndWfcOver40min)}
-              </span>
-            </div>
+          <div className={`text-xl mt-4 ${textColor}`}>
+            Buffer:&nbsp;<span className="buffer font-mono">
+              {calcBuffer(0.85, data.cumulative_callback_under_30_min, cumulativeAndWfcOver30min)}
+            </span>
           </div>
         </div>
       </div>
 
-      {/* 滞留案件 */}
+      {/* Box5: 40分以内折返し率 */}
       <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
-        <h2 className="text-lg font-bold mb-4">滞留案件</h2>
-        <div className="overflow-auto max-h-[calc(100%-2rem)]">
-          <table className="w-full">
-            <thead>
-              <tr>
-                <th className={`${subTextColor} text-left py-2`}>案件番号</th>
-                <th className={`${subTextColor} text-left py-2`}>経過時間</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(wfcData).map(([time, cases]) => (
-                Array.from(cases).map((caseId, index) => (
-                  <tr key={`${time}-${index}`}>
-                    <td className={`${textColor} py-1`}>{caseId}</td>
-                    <td className={`${textColor} py-1`}>{time}</td>
-                  </tr>
-                ))
-              ))}
-            </tbody>
-          </table>
+        <h2 className="text-lg font-bold mb-4">40分以内折返し率</h2>
+        <div className="flex flex-col items-center">
+          <span className={`text-5xl font-bold mb-4 ${textColor}`}>
+            {formatPercentage(data.cumulative_callback_rate_under_40_min)}%
+          </span>
+          <div className={`text-2xl ${textColor} flex items-center gap-2`}>
+            <span className="font-mono">{data.cumulative_callback_under_40_min}</span>
+            <span className="text-lg mx-2">/</span>
+            <span className="font-mono">
+              {cumulativeAndWfcOver40min}
+              <span className={`ml-1 text-2xl ${textColor}`}>
+                ({data.waiting_for_callback_over_40min})
+              </span>
+            </span>
+          </div>
+          <div className={`text-xl mt-4 ${textColor}`}>
+            Buffer:&nbsp;<span className="buffer font-mono">
+              {calcBuffer(0.90, data.cumulative_callback_under_40_min, cumulativeAndWfcOver40min)}
+            </span>
+          </div>
         </div>
       </div>
     </div>

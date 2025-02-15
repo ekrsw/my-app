@@ -1,7 +1,8 @@
-const digit = 2;
+import { settings } from '../config/settings';
 
 export function formatPercentage(value: number): number {
-  return Math.round(value * 100 * Math.pow(10, digit)) / 100;
+  const { percentageDecimalPlaces } = settings.display;
+  return Math.round(value * 100 * Math.pow(10, percentageDecimalPlaces)) / Math.pow(10, percentageDecimalPlaces);
 }
 
 export function calcBuffer(r: number, n: number, c: number): string | number {

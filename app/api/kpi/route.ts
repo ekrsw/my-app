@@ -1,15 +1,16 @@
 import { NextResponse } from 'next/server';
 
+import { settings } from '../../config/settings';
+
 export async function GET() {
-  const host = "letsw8-0408";
-  const api_key = "p22ehtbS.T4G1f9urNz84QaeID8IV7iNPlTNLCD15";
+  const { host, port, apiKey } = settings.api;
   const headers = {
-    'x-api-key': api_key,
+    'x-api-key': apiKey,
     'Accept': 'application/json'
   };
 
   try {
-    const url = `http://${host}/api/kpi/`;
+    const url = `http://${host}${port !== 80 ? `:${port}` : ''}/api/kpi/`;
     console.log('Fetching KPI data from:', url);
     
     const fetchOptions: RequestInit = {
