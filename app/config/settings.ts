@@ -1,9 +1,9 @@
 export const settings = {
   // APIサーバー設定
   api: {
-    host: "letsw8-0408",
-    port: 80, // デフォルトポート
-    apiKey: "p22ehtbS.T4G1f9urNz84QaeID8IV7iNPlTNLCD15"
+    host: process.env.API_HOST || '',
+    port: Number(process.env.API_PORT) || 80, // デフォルトポート
+    apiKey: process.env.API_KEY || ''
   },
 
   // 表示設定
