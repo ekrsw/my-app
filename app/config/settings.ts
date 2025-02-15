@@ -16,7 +16,7 @@ export const settings = {
     directHandlingRate: 0.35, // 直受け率の目標値 (35%)
     callbackRates: {
       within20min: 0.80, // 20分以内折返し率の目標値 (80%)
-      within30min: 0.85, // 30分以内折返し率の目標値 (85%)
+      within30min: 0.0, // 30分以内折返し率の目標値
       within40min: 0.90  // 40分以内折返し率の目標値 (90%)
     }
   }
