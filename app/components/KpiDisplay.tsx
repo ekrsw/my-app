@@ -33,7 +33,25 @@ export function KpiDisplay({ data, textColor, subTextColor, boxBg }: KpiDisplayP
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
-      {/* Box1: 応答率 */}
+      {/* Box1: 総着信数 */}
+      <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
+        <h2 className="text-lg font-bold mb-4">総着信数</h2>
+        <div className="flex flex-col items-center">
+          <span className={`text-5xl font-bold mb-4 ${textColor}`}>
+            {data.total_calls}
+          </span>
+          <div className={`text-xl ${textColor} flex flex-col items-center gap-4`}>
+            <div className={`${subTextColor} flex items-center gap-2`}>
+              放棄呼: <span className="font-mono">{data.abandoned_calls}</span>
+            </div>
+            <div className={`${subTextColor} flex items-center gap-2`}>
+              留守電: <span className="font-mono">{data.voicemails}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Box2: 応答率 */}
       <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
         <h2 className="text-lg font-bold mb-4">応答率</h2>
         <div className="flex flex-col items-center">
@@ -48,7 +66,7 @@ export function KpiDisplay({ data, textColor, subTextColor, boxBg }: KpiDisplayP
         </div>
       </div>
 
-      {/* Box2: 直受け率 */}
+      {/* Box3: 直受け率 */}
       <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
         <h2 className="text-lg font-bold mb-4">直受け率</h2>
         <div className="flex flex-col items-center">
@@ -66,7 +84,7 @@ export function KpiDisplay({ data, textColor, subTextColor, boxBg }: KpiDisplayP
         </div>
       </div>
 
-      {/* Box3: 20分以内折返し率 */}
+      {/* Box4: 20分以内折返し率 */}
       <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
         <h2 className="text-lg font-bold mb-4">20分以内折返し率</h2>
         <div className="flex flex-col items-center">
@@ -91,7 +109,7 @@ export function KpiDisplay({ data, textColor, subTextColor, boxBg }: KpiDisplayP
         </div>
       </div>
 
-      {/* Box4: 30分以内折返し率 */}
+      {/* Box5: 30分以内折返し率 */}
       <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
         <h2 className="text-lg font-bold mb-4">30分以内折返し率</h2>
         <div className="flex flex-col items-center">
@@ -116,7 +134,7 @@ export function KpiDisplay({ data, textColor, subTextColor, boxBg }: KpiDisplayP
         </div>
       </div>
 
-      {/* Box5: 40分以内折返し率 */}
+      {/* Box6: 40分以内折返し率 */}
       <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
         <h2 className="text-lg font-bold mb-4">40分以内折返し率</h2>
         <div className="flex flex-col items-center">
