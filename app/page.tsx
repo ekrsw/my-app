@@ -80,7 +80,7 @@ export default function Home() {
           {[0, 20, 40].map((minutes) => {
             const date = new Date(currentTime);
             // Asia/Tokyoのタイムゾーンを設定
-            const tokyoTime = new Date(date.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+            const tokyoTime = new Date(date.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }));
             tokyoTime.setMinutes(tokyoTime.getMinutes() - minutes);
             return (
               <div
