@@ -33,7 +33,7 @@ export function KpiDisplay({ data, textColor, subTextColor, boxBg }: KpiDisplayP
     data.waiting_for_callback_over_40min;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
+    <div className="h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
       {/* Box1: 総着信数 */}
       <div className={`${boxBg} rounded-lg p-4 shadow-md`}>
         <h2 className="text-lg font-bold mb-4">総着信数</h2>

@@ -53,7 +53,7 @@ export default function Home() {
   }
 
   return (
-    <div className={`min-h-screen grid grid-rows-[60px_1fr_50px] ${bgColor} ${textColor}`}>
+    <div className={`min-h-screen h-screen grid grid-rows-[60px_1fr_50px] ${bgColor} ${textColor}`}>
       <header className={`${headerFooterBg} flex items-center justify-between px-4 shadow-md`}>
         <div>
           <h1 className="text-2xl font-bold">KPI速報</h1>
